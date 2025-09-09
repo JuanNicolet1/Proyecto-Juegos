@@ -1,0 +1,20 @@
+.mi-form{
+    padding: 5px;
+}
+
+.link-login{
+    display: flex;
+    justify-content: center;
+}
+
+.mi-boton{
+    width: 150px;
+    display: block;
+    margin: 0 auto;
+}
+
+.error{
+    color: red;
+    padding: 5px;
+    margin: 5px;
+}

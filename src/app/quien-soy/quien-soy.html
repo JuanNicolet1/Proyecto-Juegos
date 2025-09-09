@@ -1,0 +1,33 @@
+<app-nav></app-nav>
+
+<div class="container py-5">
+
+  @if (loading) {
+    <div class="d-flex justify-content-center align-items-center">
+      <p class="ms-3">Cargando perfil...</p>
+    </div>
+  }
+
+  @if (userData) {
+    <div class="row justify-content-center">
+      <div class="card shadow-sm border-0">
+         <div class="card-body text-center">
+            <img [src]="userData.avatar_url" alt="Foto de perfil de {{ userData.name }}" class="mb-3" width="150" height="150" style="object-fit: cover;">
+            <h2 class="card-title">{{ userData.login }}</h2>
+            <p class="card-text text-muted">{{ userData.bio }}
+                @if(!userData.bio){
+                    <p>Sin biografía</p>
+                }
+            </p>
+            <div class="d-flex justify-content-center gap-3 mb-3">
+              <p class="badge bg-primary"> Seguidores: {{ userData.followers }}</p>
+              <p class="badge bg-secondary"> Siguiendo: {{ userData.following }}</p>
+              <p class="badge bg-info"> Repos públicos: {{ userData.public_repos }}</p>
+            </div>
+            <p class="card-text"><strong>Usuario:</strong> {{ userData.login }}</p>
+            <a [href]="userData.html_url" class="btn btn-outline-primary">Ver perfil en GitHub</a>
+          </div>
+        </div>
+    </div>
+  }
+</div>

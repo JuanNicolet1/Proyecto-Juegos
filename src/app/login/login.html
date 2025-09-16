@@ -1,12 +1,14 @@
 <app-nav-registro-login></app-nav-registro-login>
 <div class="container mt-5 w-50">
-    <form (ngSubmit)="login()" class="card p-4 shadow mi-form">
+    <form (ngSubmit)="logIn()" class="card p-4 shadow mi-form">
+      <h2 class="mb-3"> Inicia Sesión </h2>
       <input [(ngModel)]="email" name="email" type="email" placeholder="Email" required class="form-control mb-3">
       <input [(ngModel)]="password" name="password" type="password" placeholder="Contraseña" required class="form-control mb-3">
       <button type="submit" class="btn btn-primary mi-boton mb-3">Ingresar</button>
       <a class="link-login" href="registro">¿No tenés una cuenta? Registrate acá</a>
+      <a class="link-login" href="acceso-rapido/acceso-rapido">Acceso Rapido</a>
       @if (loading === false){
-        <p class="error"> Error al iniciar sesión </p>
+        <p class="error"> {{ errorMessage }} </p>
       }
     </form>
 </div>

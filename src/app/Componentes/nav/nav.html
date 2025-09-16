@@ -1,18 +1,32 @@
 <div>
-    <nav>
-        <div>
-            <h1>Game Store</h1>
-            <ul class="opciones" type="none">
-                <li>
-                    <a href="bienvenida/home">Juegos</a>
-                </li>
-                <li>
-                    <a routerLink="/quien-soy">Perfil GitHub</a>
-                </li>
-                <li>
-                    <a routerLink="/dashboard">Configuración</a>
-                </li>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+        <div class = "container-fluid">
+            <h1 class="text-light mb">Game Store</h1>
+            <ul class="navbar-nav ms-auto" type= "none">
+                <p class="text-light me-5"> {{ navService.saludo }} </p>
+                @if (logOut === false){
+                    <li><button (click)="logout()" class="btn btn-outline-light">Cerrar Sesión</button></li>
+                }
+                @if(logOut === true){
+                    <li><a href="registro" class="btn btn-outline-light me-2">Registrarse</a></li>
+                    <li><a href="login" class="btn btn-outline-light">Iniciar Sesión</a></li>
+                }
             </ul>
         </div>
     </nav>
+
+    <div class="navbar navbar-expand-lg navbar-light bg-dark">
+        <ul class="navbar-nav mx-auto d-flex gap-5" type="none">
+            <li>
+                <a class="btn btn-outline-light" href="bienvenida/home">Juegos</a>
+            </li>
+            <li>
+                <a class="btn btn-outline-light" routerLink="/quien-soy">Perfil GitHub</a>
+            </li>
+            <li>
+                <a class="btn btn-outline-light" routerLink="/dashboard">Configuración</a>
+            </li>
+        </ul>
+    </div>
+    
 </div>

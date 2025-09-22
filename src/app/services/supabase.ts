@@ -37,4 +37,60 @@ export class SupabaseService {
   onAuthStateChange(callback: (event: AuthChangeEvent, session: Session | null) => void){
     return this.supabase.auth.onAuthStateChange(callback);
   }
+
+  async guardarPartida(usuario: string, puntaje: number, rondasPerdidas: number, rondasGanadas: number) {
+    const { data, error } = await this.supabase
+      .from('partidas')
+      .insert([
+        { usuario, puntaje, rondas_perdidas: rondasPerdidas, rondas_ganadas: rondasGanadas }
+      ]);
+
+    if (error) {
+      console.error('Error guardando partida:', error.message);
+      throw error;
+    }
+    return data;
+  }
+
+  async guardarPartidaAhorcado(usuario: string, letras_usadas: number, palabra_acertada: string) {
+    const { data, error } = await this.supabase
+      .from('partidasahorcado')
+      .insert([
+        { usuario, letras_usadas, palabra_acertada }
+      ]);
+
+    if (error) {
+      console.error('Error guardando partida:', error.message);
+      throw error;
+    }
+    return data;
+  }
+
+  async enviarMensaje(mensaje: string) {
+  const usuario = (await this.supabase.auth.getUser()).data.user?.email ?? 'Anónimo';
+
+  return await this.supabase
+    .from('chat')
+    .insert([{ usuario, mensaje, fecha: new Date() }]);
+}
+
+  async getMensajes() {
+    const { data, error } = await this.supabase
+      .from('chat')
+      .select('*')
+      .order('fecha', { ascending: true });
+    if (error) throw error;
+    return data;
+  }
+
+  suscribirseMensajes(callback: (payload: any) => void) {
+    return this.supabase
+      .channel('chat-room')
+      .on(
+        'postgres_changes',
+        { event: 'INSERT', schema: 'public', table: 'chat' },
+        (payload) => callback(payload)
+      )
+      .subscribe();
+  }
 } 

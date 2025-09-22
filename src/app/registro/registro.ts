@@ -35,13 +35,14 @@ export class Registro {
     }
 
     try{
+        await this.supabase.signUp(this.email, this.password);  
+        this.loading = true;
+        alert("gg");
+        this.navService.datosNav(this.email);
+        this.cdr.detectChanges();
         let cuentasGuardadas = JSON.parse(localStorage.getItem('cuentas') || '[]');
         if (!cuentasGuardadas.includes(this.email)) {
-            await this.supabase.signUp(this.email, this.password);  
-            this.loading = true;
-            this.navService.datosNav(this.email);
             cuentasGuardadas.push(this.email);
-            this.router.navigate(['/bienvenida/home']);
             localStorage.setItem('cuentas', JSON.stringify(cuentasGuardadas));
             this.cdr.detectChanges();
           } else {

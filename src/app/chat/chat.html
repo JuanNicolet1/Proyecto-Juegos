@@ -1,0 +1,23 @@
+<div class="chat-container p-3 border rounded bg-light">
+  <div class="messages overflow-auto" style="max-height: 400px;">
+    <div *ngFor="let msg of mensajes">
+      <div 
+        class="p-2 my-1 rounded"
+        [ngClass]="{
+          'bg-primary text-white text-end ms-auto': msg.usuario === usuario,
+          'bg-secondary text-white text-start me-auto': msg.usuario !== usuario
+        }"
+        style="max-width: 70%;"
+      >
+        <small><b>{{msg.usuario}}</b> - {{ msg.fecha | date:'shortTime' }}</small>
+        <div>{{ msg.mensaje }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="input-group mt-3">
+    <input type="text" class="form-control" [(ngModel)]="mensaje" (keyup.enter)="enviar()">
+    <button class="btn btn-success" (click)="enviar()">Enviar</button>
+  </div>
+</div>
+

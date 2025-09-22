@@ -1,0 +1,60 @@
+<app-nav></app-nav>
+
+
+
+  <div class="row w-100 justify-content-center align-items-center">
+    <div class="col-3 text-center d-none d-md-block">
+        <p class="fs-5 fw-bold">Vida: {{vida}}</p>
+    </div>
+    <div class="col-md-6">
+        <div class="d-flex justify-content-center align-items-center mt-4 gap-2">
+    @for (letra of palabraOculta; track $index) {
+        <span class="fs-2">{{ letra }} </span>
+    }
+    </div>
+        <div class="d-flex justify-content-center gap-1">
+            <button (click)="a()" [disabled]="puestoA">A</button>
+            <button (click)="b()" [disabled]="puestoB">B</button>
+            <button (click)="c()" [disabled]="puestoC">C</button>
+            <button (click)="d()" [disabled]="puestoD">D</button>
+            <button (click)="e()" [disabled]="puestoE">E</button>
+            <button (click)="f()" [disabled]="puestoF">F</button>
+            <button (click)="g()" [disabled]="puestoG">G</button>
+            <button (click)="h()" [disabled]="puestoH">H</button>
+            <button (click)="i()" [disabled]="puestoI">I</button>
+            <button (click)="j()" [disabled]="puestoJ">J</button>
+            <button (click)="k()" [disabled]="puestoK">K</button>
+        </div>
+
+        <div class="d-flex justify-content-center gap-1 mt-1">
+            <button (click)="l()" [disabled]="puestoL">L</button>
+            <button (click)="m()" [disabled]="puestoM">M</button>
+            <button (click)="n()" [disabled]="puestoN">N</button>
+            <button (click)="enie()" [disabled]="puestoENIE">Ñ</button>
+            <button (click)="o()" [disabled]="puestoO">O</button>
+            <button (click)="p()" [disabled]="puestoP">P</button>
+            <button (click)="q()" [disabled]="puestoQ">Q</button>
+            <button (click)="r()" [disabled]="puestoR">R</button>
+            <button (click)="s()" [disabled]="puestoS">S</button>
+        </div>
+    
+        <div class="d-flex justify-content-center gap-1 mt-1">
+            <button (click)="t()" [disabled]="puestoT">T</button>
+            <button (click)="u()" [disabled]="puestoU">U</button>
+            <button (click)="v()" [disabled]="puestoV">V</button>
+            <button (click)="w()" [disabled]="puestoW">W</button>
+            <button (click)="x()" [disabled]="puestoX">X</button>
+            <button (click)="y()" [disabled]="puestoY">Y</button>
+            <button (click)="z()" [disabled]="puestoZ">Z</button>
+        </div>
+        <div class="d-flex justify-content-center flex-column align-items-center mt-3">
+            <p>{{letrasUsadas.join(', ')}}</p>
+            <p> {{mensaje}} </p>
+        </div>
+    </div>
+    <div class="col-3"></div>
+  </div>
+
+<div class="d-flex flex-column justify-content-center align-items-center">
+    <a routerLink="/bienvenida/home" class="btn btn-secondary mt-3">Volver al menú</a>
+</div>

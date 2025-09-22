@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { NavRegistroLogin } from '../../Componentes/nav-registro-login/nav-registro-login';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-acceso-rapido',
@@ -9,6 +11,8 @@ import { NavRegistroLogin } from '../../Componentes/nav-registro-login/nav-regis
 })
 export class AccesoRapido implements OnInit {
   cuentas: string[] = [];
+  private authService = inject(AuthService);
+  private router = inject(Router);
 
   ngOnInit(): void {
     const guardadas = localStorage.getItem('cuentas');
@@ -18,6 +22,11 @@ export class AccesoRapido implements OnInit {
     } else {
       this.cuentas = [];
     }
+  }
+
+  iniciarSesion(cuenta: string): void {
+    this.authService.loginRapido(cuenta);
+    this.router.navigate(['/bienvenida/home']);
   }
 }
 

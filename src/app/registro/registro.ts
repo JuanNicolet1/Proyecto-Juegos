@@ -19,8 +19,10 @@ export class Registro {
   email = '';
   password = '';
   errorMessage = '';
+  mensajeExito = '';
   cuentas: string[] = [];
   loading: boolean = true;
+  loadingExito: boolean = false;
   
   constructor(private router: Router, private supabase: SupabaseService, private navService: NavEmail, private cdr: ChangeDetectorRef) {}
   async register() {
@@ -37,8 +39,10 @@ export class Registro {
     try{
         await this.supabase.signUp(this.email, this.password);  
         this.loading = true;
-        alert("gg");
+        this.loadingExito = true;
+        console.log("gg");
         this.navService.datosNav(this.email);
+        this.mensajeExito = "Confirma tu cuenta en el link que te enviamos al mail";
         this.cdr.detectChanges();
         let cuentasGuardadas = JSON.parse(localStorage.getItem('cuentas') || '[]');
         if (!cuentasGuardadas.includes(this.email)) {

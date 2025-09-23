@@ -52,7 +52,7 @@ export class Login {
       await this.router.navigate(['/bienvenida/home']);
       this.loading = false;
     } catch (e: any) {
-      this.errorMessage = e.message || 'Error al iniciar sesión';
+      this.errorMessage = 'Error al iniciar sesión';
       this.loading = false;
     }
   }

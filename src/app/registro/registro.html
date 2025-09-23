@@ -13,5 +13,9 @@
       @if (loading === false){
         <p class="error"> {{ errorMessage }} </p>
       }
+
+      @if (loadingExito === true){
+        <p class="text-success"> {{ mensajeExito }} </p>
+      }
     </form>
 </div>

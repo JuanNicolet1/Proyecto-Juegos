@@ -30,7 +30,7 @@
             <p class="h4 text-warning">Puntaje: <span class="badge bg-warning">{{puntaje}}</span></p>
           </div>
 
-        @if(!perdido){
+        @if(!perdido && !ganaste){
           @if (preguntaActual) {
             <div class="text-center mb-4">
               <h3 class="card-title h2 text-light mb-4">{{ preguntaActual.pregunta }}</h3>
@@ -44,11 +44,19 @@
                 }
               </ul>
             </div>
-          }
-        }
-        @else {
+          }}
+        
+        @if(perdido) {
           <div class="text-center alert alert-danger mt-4" role="alert">
             <p class="lead">Perdiste el juego.</p>
+            <hr>
+            <p class="mb-0">Intentalo de nuevo para mejorar tu puntuación.</p>
+            </div>
+        }
+
+        @if(ganaste){
+          <div class="text-center bg-success mt-4" role="alert">
+            <p class="lead">Ganaste el juego.</p>
             <hr>
             <p class="mb-0">Intentalo de nuevo para mejorar tu puntuación.</p>
             </div>

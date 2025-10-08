@@ -20,6 +20,7 @@ export class Preguntados implements OnInit {
   vidas = 5;
   lives = false;
   perdido = false;
+  ganaste = false;
   usuario = '';
   puntaje = 0;
 
@@ -66,8 +67,11 @@ export class Preguntados implements OnInit {
       console.log(this.usuario, this.puntaje);
 
       this.guardar();
-      this.index = 0;
-      this.preguntaActual = this.preguntas[this.index];
+      if(this.vidas >= 1){
+        this.ganaste = true;
+      } else {
+        this.perdido = true;
+      }
     }
     this.cdr.detectChanges();
   }

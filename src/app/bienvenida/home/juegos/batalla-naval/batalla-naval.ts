@@ -666,7 +666,7 @@ chequear25(){
     this.mensaje_victoria = false;
     this.mensaje_derrota = false;
     this.barcos_restantes = 6;
-    this.disparos = 8;
+    this.disparos = 9;
     this.perdido = false
     this.victoria = false;
     this.click1 = false

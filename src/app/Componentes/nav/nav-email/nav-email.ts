@@ -4,9 +4,13 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class NavEmail {
+  saludoN = '';
   saludo = '';
+  saludoApellido = ''
 
-  datosNav(email: string){
+  datosNav(nombre: string, apellido: string, email: string){
+    this.saludoN = nombre
+    this.saludoApellido = apellido;
     this.saludo = email;
   }
 }

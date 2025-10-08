@@ -1,0 +1,94 @@
+<app-nav></app-nav>
+
+<div class="container py-4">
+  <div class="card bg-dark text-white shadow-lg border-0">
+    <div class="card-body">
+      <h1 class="card-title text-center mb-4 text-primary">¡Batalla Naval!</h1>
+      @if(victoria || perdido){
+        <p class="card-text text-center">{{ victoria | resultadoBatalla }}</p>
+      }
+
+      <div class="d-flex flex-column align-items-center mb-4">
+        <div class="game-board-grid mb-3">
+          <div class="d-flex justify-content-center gap-1 mb-1">
+            <button class="btn btn-square" [ngClass]="{'btn-outline-primary': estado1 === '-', 'btn-danger': estado1 === 'noBarco', 'btn-success': estado1 === 'barco'}" (click)="chequear1()" [disabled]="click1 || perdido || victoria">X</button>
+            <button class="btn btn-square" [ngClass]="{'btn-outline-primary': estado2 === '-', 'btn-danger': estado2 === 'noBarco', 'btn-success': estado2 === 'barco'}" (click)="chequear2()" [disabled]="click2 || perdido || victoria">X</button>
+            <button class="btn btn-square" [ngClass]="{'btn-outline-primary': estado3 === '-', 'btn-danger': estado3 === 'noBarco', 'btn-success': estado3 === 'barco'}" (click)="chequear3()" [disabled]="click3 || perdido || victoria">X</button>
+            <button class="btn btn-square" [ngClass]="{'btn-outline-primary': estado4 === '-', 'btn-danger': estado4 === 'noBarco', 'btn-success': estado4 === 'barco'}" (click)="chequear4()" [disabled]="click4 || perdido || victoria">X</button>
+            <button class="btn btn-square" [ngClass]="{'btn-outline-primary': estado5 === '-', 'btn-danger': estado5 === 'noBarco', 'btn-success': estado5 === 'barco'}" (click)="chequear5()" [disabled]="click5 || perdido || victoria">X</button>
+          </div>
+          <div class="d-flex justify-content-center gap-1 mb-1">
+            <button class="btn btn-square" [ngClass]="{'btn-outline-primary': estado6 === '-', 'btn-danger': estado6 === 'noBarco', 'btn-success': estado6 === 'barco'}" (click)="chequear6()" [disabled]="click6 || perdido || victoria">X</button>
+            <button class="btn btn-square" [ngClass]="{'btn-outline-primary': estado7 === '-', 'btn-danger': estado7 === 'noBarco', 'btn-success': estado7 === 'barco'}" (click)="chequear7()" [disabled]="click7 || perdido || victoria">X</button>
+            <button class="btn btn-square" [ngClass]="{'btn-outline-primary': estado8 === '-', 'btn-danger': estado8 === 'noBarco', 'btn-success': estado8 === 'barco'}" (click)="chequear8()" [disabled]="click8 || perdido || victoria">X</button>
+            <button class="btn btn-square" [ngClass]="{'btn-outline-primary': estado9 === '-', 'btn-danger': estado9 === 'noBarco', 'btn-success': estado9 === 'barco'}" (click)="chequear9()" [disabled]="click9 || perdido || victoria">X</button>
+            <button class="btn btn-square" [ngClass]="{'btn-outline-primary': estado10 === '-', 'btn-danger': estado10 === 'noBarco', 'btn-success': estado10 === 'barco'}" (click)="chequear10()" [disabled]="click10 || perdido || victoria">X</button>
+          </div>
+          <div class="d-flex justify-content-center gap-1 mb-1">
+            <button class="btn btn-square" [ngClass]="{'btn-outline-primary': estado11 === '-', 'btn-danger': estado11 === 'noBarco', 'btn-success': estado11 === 'barco'}" (click)="chequear11()" [disabled]="click11 || perdido || victoria">X</button>
+            <button class="btn btn-square" [ngClass]="{'btn-outline-primary': estado12 === '-', 'btn-danger': estado12 === 'noBarco', 'btn-success': estado12 === 'barco'}" (click)="chequear12()" [disabled]="click12 || perdido || victoria">X</button>
+            <button class="btn btn-square" [ngClass]="{'btn-outline-primary': estado13 === '-', 'btn-danger': estado13 === 'noBarco', 'btn-success': estado13 === 'barco'}" (click)="chequear13()" [disabled]="click13 || perdido || victoria">X</button>
+            <button class="btn btn-square" [ngClass]="{'btn-outline-primary': estado14 === '-', 'btn-danger': estado14 === 'noBarco', 'btn-success': estado14 === 'barco'}" (click)="chequear14()" [disabled]="click14 || perdido || victoria">X</button>
+            <button class="btn btn-square" [ngClass]="{'btn-outline-primary': estado15 === '-', 'btn-danger': estado15 === 'noBarco', 'btn-success': estado15 === 'barco'}" (click)="chequear15()" [disabled]="click15 || perdido || victoria">X</button>
+          </div>
+          <div class="d-flex justify-content-center gap-1 mb-1">
+            <button class="btn btn-square" [ngClass]="{'btn-outline-primary': estado16 === '-', 'btn-danger': estado16 === 'noBarco', 'btn-success': estado16 === 'barco'}" (click)="chequear16()" [disabled]="click16 || perdido || victoria">X</button>
+            <button class="btn btn-square" [ngClass]="{'btn-outline-primary': estado17 === '-', 'btn-danger': estado17 === 'noBarco', 'btn-success': estado17 === 'barco'}" (click)="chequear17()" [disabled]="click17 || perdido || victoria">X</button>
+            <button class="btn btn-square" [ngClass]="{'btn-outline-primary': estado18 === '-', 'btn-danger': estado18 === 'noBarco', 'btn-success': estado18 === 'barco'}" (click)="chequear18()" [disabled]="click18 || perdido || victoria">X</button>
+            <button class="btn btn-square" [ngClass]="{'btn-outline-primary': estado19 === '-', 'btn-danger': estado19 === 'noBarco', 'btn-success': estado19 === 'barco'}" (click)="chequear19()" [disabled]="click19 || perdido || victoria">X</button>
+            <button class="btn btn-square" [ngClass]="{'btn-outline-primary': estado20 === '-', 'btn-danger': estado20 === 'noBarco', 'btn-success': estado20 === 'barco'}" (click)="chequear20()" [disabled]="click20 || perdido || victoria">X</button>
+          </div>
+          <div class="d-flex justify-content-center gap-1">
+            <button class="btn btn-square" [ngClass]="{'btn-outline-primary': estado21 === '-', 'btn-danger': estado21 === 'noBarco', 'btn-success': estado21 === 'barco'}" (click)="chequear21()" [disabled]="click21 || perdido || victoria">X</button>
+            <button class="btn btn-square" [ngClass]="{'btn-outline-primary': estado22 === '-', 'btn-danger': estado22 === 'noBarco', 'btn-success': estado22 === 'barco'}" (click)="chequear22()" [disabled]="click22 || perdido || victoria">X</button>
+            <button class="btn btn-square" [ngClass]="{'btn-outline-primary': estado23 === '-', 'btn-danger': estado23 === 'noBarco', 'btn-success': estado23 === 'barco'}" (click)="chequear23()" [disabled]="click23 || perdido || victoria">X</button>
+            <button class="btn btn-square" [ngClass]="{'btn-outline-primary': estado24 === '-', 'btn-danger': estado24 === 'noBarco', 'btn-success': estado24 === 'barco'}" (click)="chequear24()" [disabled]="click24 || perdido || victoria">X</button>
+            <button class="btn btn-square" [ngClass]="{'btn-outline-primary': estado25 === '-', 'btn-danger': estado25 === 'noBarco', 'btn-success': estado25 === 'barco'}" (click)="chequear25()" [disabled]="click25 || perdido || victoria">X</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-4">
+        <p class="h5 text-info">Barcos restantes: <span class="badge bg-secondary">{{barcos_restantes}}</span></p>
+        <p class="h5 text-warning">Disparos restantes: <span class="badge bg-secondary">{{ disparos }}</span></p>
+
+        @if(mensaje_victoria){
+          <div class="alert alert-success mt-3" role="alert">
+            <p class="lead">¡Hundiste un barco! Quedan {{ barcos_restantes }}</p>
+          </div>
+        }
+
+        @if(mensaje_derrota){
+          <div class="alert alert-info mt-3" role="alert">
+            <p class="lead">¡Agua! No había ningún barco</p>
+          </div>
+        }
+
+        @if(perdido){
+          <div class="alert alert-danger mt-3" role="alert">
+            <p class="lead mb-2">¡Perdiste! Te quedaste sin disparos</p>
+            <p class="mb-3">Quedaron {{ barcos_restantes }} barcos sin hundir</p>
+            <div class="d-grid gap-2">
+              <button class="btn btn-success btn-lg" (click)="reiniciar()">Comenzar una nueva partida</button>
+              <button class="btn btn-info btn-lg" (click)="revelar()">Revelar posiciones</button>
+            </div>
+          </div>
+        }
+
+        @if(victoria){
+          <div class="alert alert-success mt-3" role="alert">
+            <p class="lead mb-2">¡Ganaste!</p>
+            <p class="mb-3">Descubriste todos los barcos</p>
+            <div class="d-grid gap-2">
+              <button class="btn btn-warning btn-lg" (click)="siguiente()">Siguiente nivel</button>
+            </div>
+          </div>
+        }
+      </div>
+
+      <div class="text-center mt-4">
+        <a routerLink="/ranking-bn" class="btn btn-outline-light btn-lg">Ver Ranking</a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,38 +1,52 @@
 <app-nav></app-nav>
 <div class="container container-custom">
   <div class="row">
-    <div class="col-md-6"> <div class="card-body text-center mb-4"> <img src="assets/logos/mm-logo.png" alt="" width="350px">
-        <h2>Mayor o menor</h2>
-        <p>Adivina si la carta del rival es mayor o menor que el actual</p>
-        <a routerLink="/juegos/mayor-menor" class="btn btn-primary">Jugar</a>
+    <div class="col-md-6"> 
+      <div class="card text-center shadow-sm border-0 mt-5" hoverScale> 
+        <div class="card-body">
+          <img src="assets/logos/mm-logo.png" alt="" width="350px">
+          <h2>Mayor o menor</h2>
+          <p>Adivina si la carta del rival es mayor o menor que el actual</p>
+          <a routerLink="/juegos/mayor-menor" class="btn btn-primary">Jugar</a>
+        </div>
       </div>
 
-      <div class="card-body text-center mb-4">
-        <img src="assets/logos/preguntados-logo.png" alt="" width="350px">
-        <h2>Preguntados</h2>
-        <p>Responde las preguntas y demuestra tu conocimiento</p>
-        <p><strong>Proximamente</strong></p>
-        <a routerLink="/juegos/preguntados" class="btn btn-secondary disabled" aria-disabled="true">Jugar</a> </div>
+      <div class="card text-center shadow-sm border-0 mt-5" hoverScale>
+        <div class="card-body">
+          <img src="assets/logos/preguntados-logo.png" alt="" width="350px">
+          <h2>Preguntados</h2>
+          <p>Responde las preguntas y demuestra tu conocimiento</p>
+          <a routerLink="/juegos/preguntados" class="btn btn-primary">Jugar</a>
+        </div>
+      </div>
 
-      
     </div>
 
     
 
-      <div class="col-md-6"> <div class="card-body text-center mb-4">
-        <img src="assets/logos/ahorcado-logo.png" alt="" width="350px">
-        <h2>Ahorcado</h2>
-        <p>Adivina la palabra oculta letra por letra</p>
-        <a routerLink="/juegos/ahorcado" class="btn btn-primary">Jugar</a>
+      <div class="col-md-6">
+        <div class="card text-center shadow-sm border-0 mt-5" hoverScale>
+          <div class="card-body">
+            <img src="assets/logos/ahorcado-logo.png" alt="" width="350px">
+            <h2>Ahorcado</h2>
+            <p>Adivina la palabra oculta letra por letra</p>
+            <a routerLink="/juegos/ahorcado" class="btn btn-primary">Jugar</a>
+          </div>
       </div>
 
-      <div class="card-body text-center mb-4">
-        <img src="assets/logos/negro.png" alt="" width="350px">
-        <h2>Proximamente</h2>
-        <p>¡Un nuevo juego está en camino!</p>
-        </div>
+      <div class="card text-center shadow-sm border-0 mt-5" hoverScale>
+          <div class="card-body">
+            <img src="assets/logos/bn-logo.png" alt="" width="350px">
+            <h2>Batalla Naval</h2>
+              <p>Encuentra los barcos escondidos</p>
+              <a routerLink="/juegos/batalla-naval" class="btn btn-primary">Jugar</a>
+              @if(noPermitir || permitir){
+                <p class="card-text text-center">{{ noPermitir | error}}</p>
+              }
+          </div>
+      </div>
     </div>
   </div>
 </div>
 
-<app-chat></app-chat>
+<app-chat class="mt-5"></app-chat>

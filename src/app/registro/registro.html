@@ -4,10 +4,22 @@
     <form (ngSubmit)="register()" class="card p-4 shadow mi-form">
       <h2 class="mb-3"> Registrate </h2>
       <input [(ngModel)]="nombre" name="nombre" type="name" placeholder="Nombre" required class="form-control mb-3">
+      @if(!nombre){
+        <p class="error mb-3">{{errorMessageNombre}}</p>
+      }
       <input [(ngModel)]="apellido" name="apellido" type="name" placeholder="Apellido" required class="form-control mb-3">
       <input [(ngModel)]="edad" name="edad" type="number" placeholder="Edad" required class="form-control mb-3">
+      @if(!edad){
+        <p class="error mb-3">{{errorMessageEdad}}</p>
+      }
       <input [(ngModel)]="email" name="email" type="email" placeholder="Email" required class="form-control mb-3">
+      @if(!email){
+        <p class="error mb-3">{{errorMessageEmail}}</p>
+      }
       <input [(ngModel)]="password" name="password" type="password" placeholder="Contraseña" required class="form-control mb-3">
+      @if(!password){
+        <p class="error mb-3">{{errorMessageConstrasena}}</p>
+      }
       <button type="submit" class="btn btn-primary mi-boton mb-3">Registrarse</button>
       <a class="link-login" href="login">¿Ya tenés una cuenta? Inicia Sesión acá</a>
       @if (loading === false){

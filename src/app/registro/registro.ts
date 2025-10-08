@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NavRegistroLogin } from '../Componentes/nav-registro-login/nav-registro-login';
 import { NavEmail } from '../Componentes/nav/nav-email/nav-email';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-registro',
@@ -19,29 +20,40 @@ export class Registro {
   email = '';
   password = '';
   errorMessage = '';
+  errorMessageEmail = '';
+  errorMessageConstrasena = '';
+  errorMessageNombre = '';
+  errorMessageEdad = '';
   mensajeExito = '';
   cuentas: string[] = [];
   loading: boolean = true;
   loadingExito: boolean = false;
   
-  constructor(private router: Router, private supabase: SupabaseService, private navService: NavEmail, private cdr: ChangeDetectorRef) {}
+  constructor(private router: Router, private supabase: SupabaseService, private navService: NavEmail, private cdr: ChangeDetectorRef, private auth: AuthService) {}
   async register() {
-    if(!this.email && !this.password){
-      this.errorMessage = "Escribe el Email y la contraseña";
+    if(!this.email){
+      this.errorMessageEmail = "Escribe el Email";
     } 
-    else if(!this.email){
-      this.errorMessage = "Escribe el Email";
-    } 
-    else{
-      this.errorMessage = "Escribe la contraseña";
+
+    if(!this.password){
+      this.errorMessageConstrasena = "Escribe la contraseña";
+    }
+
+    if(!this.nombre){
+      this.errorMessageNombre = "Escribe el nombre";
+    }
+
+    if(!this.edad){
+      this.errorMessageEdad = "Escribe la edad";
     }
 
     try{
-        await this.supabase.signUp(this.email, this.password);  
+        await this.supabase.signUp(this.email, this.password, this.nombre, this.apellido, this.edad);  
         this.loading = true;
         this.loadingExito = true;
         console.log("gg");
-        this.navService.datosNav(this.email);
+        this.navService.datosNav(this.nombre, this.apellido, this.email);
+        this.auth.descubrirEdad(this.edad);
         this.mensajeExito = "Confirma tu cuenta en el link que te enviamos al mail";
         this.cdr.detectChanges();
         let cuentasGuardadas = JSON.parse(localStorage.getItem('cuentas') || '[]');
@@ -55,6 +67,7 @@ export class Registro {
           }
       } catch{
         this.loading = false;
+        this.errorMessage = "Email inexistente o ya registrado";
         this.cdr.detectChanges();
     }
   }

@@ -3,6 +3,7 @@
         <div class = "container-fluid">
             <h1 class="text-light mb">Game Store</h1>
             <ul class="navbar-nav ms-auto" type= "none">
+                <p class="text-light me-5"> {{ navService.saludoN + navService.saludoApellido}} </p>
                 <p class="text-light me-5"> {{ navService.saludo }} </p>
                 @if (logOut === false){
                     <li><button (click)="logout()" class="btn btn-outline-light">Cerrar Sesión</button></li>

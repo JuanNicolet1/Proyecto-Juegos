@@ -12,8 +12,10 @@ export class SupabaseService {
     this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey)
   }
 
-  async signUp(email: string, password: string){
-    const { data, error } = await this.supabase.auth.signUp({email, password});
+  async signUp(email: string, password: string, nombre: string, apellido: string, edad: number){
+    const { data, error } = await this.supabase.auth.signUp({email, password,
+      options: { data: { nombre, apellido, edad }}
+    });
     if (error) throw error;
     return data;
   }
@@ -38,11 +40,11 @@ export class SupabaseService {
     return this.supabase.auth.onAuthStateChange(callback);
   }
 
-  async guardarPartida(usuario: string, puntaje: number, rondasPerdidas: number, rondasGanadas: number) {
+  async guardarPartida(usuario: string, juego: string, fecha: Date, puntaje: number) {
     const { data, error } = await this.supabase
-      .from('partidas')
+      .from('partidas_juegos')
       .insert([
-        { usuario, puntaje, rondas_perdidas: rondasPerdidas, rondas_ganadas: rondasGanadas }
+        { usuario, juego, fecha,puntaje}
       ]);
 
     if (error) {
@@ -52,7 +54,7 @@ export class SupabaseService {
     return data;
   }
 
-  async guardarPartidaAhorcado(usuario: string, letras_usadas: number, palabra_acertada: string) {
+  async guardarPartidaAhorcado(usuario: string, letras_usadas: number, palabra_acertada: number) {
     const { data, error } = await this.supabase
       .from('partidasahorcado')
       .insert([
@@ -78,7 +80,8 @@ export class SupabaseService {
     const { data, error } = await this.supabase
       .from('chat')
       .select('*')
-      .order('fecha', { ascending: true });
+      .order('fecha', { ascending: true })
+      .limit(10)
     if (error) throw error;
     return data;
   }
@@ -92,5 +95,85 @@ export class SupabaseService {
         (payload) => callback(payload)
       )
       .subscribe();
+  }
+
+  async getPreguntas() {
+    const { data, error } = await this.supabase
+      .from('preguntados')
+      .select('*')
+
+    if (error) throw error;
+    return data;
+  }
+
+  async guardarPartidaPreguntados(usuario: string, preguntas_acertadas: number, preguntas_incorrectas: number) {
+    const { data, error } = await this.supabase
+      .from('partidaspreguntados')
+      .insert([
+        { usuario, preguntas_acertadas, preguntas_incorrectas }
+      ]);
+
+    if (error) {
+      console.error('Error guardando partida:', error.message);
+      throw error;
+    }
+    return data;
+  }
+
+  async guardarPartidaB(usuario: string, barcos_descubiertostotal: number, partidas_ganadas: number) {
+    const { data, error } = await this.supabase
+      .from('partidasbn')
+      .insert([
+        { usuario, barcos_descubiertostotal, partidas_ganadas }
+      ]);
+
+    if (error) {
+      console.error('Error guardando partida:', error.message);
+      throw error;
+    }
+    return data;
+  }
+
+  async getRankingM() {
+    const { data, error } = await this.supabase
+    .from('partidas_juegos')
+    .select('*')
+    .eq('juego', 'mayor-menor')
+    .order('puntaje', {ascending: false})
+    .limit(5)
+
+    return data || [];
+  }
+
+  async getRankingAhorcado() {
+    const { data, error } = await this.supabase
+    .from('partidas_juegos')
+    .select('*')
+    .eq('juego', 'ahorcado')
+    .order('puntaje', {ascending: false})
+    .limit(5)
+    return data || [];
+  }
+
+  async getRankingPreguntados() {
+    const { data, error } = await this.supabase
+    .from('partidas_juegos')
+    .select('*')
+    .eq('juego', 'preguntados')
+    .order('puntaje', {ascending: false})
+    .limit(5)
+
+    return data || [];
+  }
+
+  async getRankingB() {
+    const { data, error } = await this.supabase
+    .from('partidas_juegos')
+    .select('*')
+    .eq('juego', 'batalla-naval')
+    .order('puntaje', {ascending: false})
+    .limit(5)
+
+    return data || [];
   }
 } 

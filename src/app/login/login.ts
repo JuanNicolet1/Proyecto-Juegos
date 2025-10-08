@@ -17,7 +17,11 @@ import { NavEmail } from '../Componentes/nav/nav-email/nav-email';
 export class Login {
   email = '';
   password = '';
+  nombre = '';
+  apellido = '';
   errorMessage = '';
+  errorMessageEmail = '';
+  errorMessageConstrasena = '';
   loading = false;
 
   constructor(
@@ -31,28 +35,23 @@ export class Login {
     this.errorMessage = '';
     this.loading = true;
 
-    if (!this.email && !this.password) {
-      this.errorMessage = 'Escribe el email y la contraseña';
-      this.loading = false;
-      return;
-    } else if (!this.email) {
-      this.errorMessage = 'Escribe el email';
-      this.loading = false;
-      return;
-    } else if (!this.password) {
-      this.errorMessage = 'Escribe la contraseña';
-      this.loading = false;
-      return;
+    if(!this.email){
+      this.errorMessageEmail = "Escribe el Email";
+    } 
+
+    if(!this.password){
+      this.errorMessageConstrasena = "Escribe la contraseña";
     }
 
     try {
       const { user, session } = await this.supabase.logIn(this.email, this.password);
+      const nombreUsuario = user?.user_metadata?.['nombre'] || ''; 
       this.authService.login(this.email, this.password);
-      this.navService.datosNav(this.email);
+      this.navService.datosNav(this.nombre, this.apellido, this.email);
       await this.router.navigate(['/bienvenida/home']);
       this.loading = false;
     } catch (e: any) {
-      this.errorMessage = 'Error al iniciar sesión';
+      this.errorMessage = 'Email o contraseña incorrectos';
       this.loading = false;
     }
   }

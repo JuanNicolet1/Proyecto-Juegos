@@ -20,9 +20,10 @@ export class ChatComponent implements OnInit {
   constructor(private supabaseService: SupabaseService, private auth: AuthService, private cdr: ChangeDetectorRef) {}
 
   async ngOnInit() {
+    this.usuario = this.auth.username();
     this.mensajes = await this.supabaseService.getMensajes();
     this.channel = this.supabaseService.suscribirseMensajes((payload) => {
-      this.mensajes.push(payload.new);
+    this.mensajes.push(payload.new);
     });
   }
 

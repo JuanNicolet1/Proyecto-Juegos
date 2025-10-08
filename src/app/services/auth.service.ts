@@ -9,6 +9,7 @@ export class AuthService {
 
   isAuthenticated = computed(() => this.loggedIn());
   username = computed(() => this.user()?.name ?? 'Invitado');
+  edad = 0;
 
   constructor(private supabase: SupabaseService) {
     this.supabase.getUser().then((user: User | null) => {
@@ -42,8 +43,24 @@ export class AuthService {
         localStorage.setItem("currentUser", username);
     }
 
+    loginRol(username: string) {
+        this.loggedIn.set(true);
+    }
+
   logout() {
     this.loggedIn.set(false);
     this.user.set(null);
+  }
+
+  descubrirEdad(anio: number){
+    this.edad = anio
+  }
+
+  edadMayor(){
+    if(this.edad > 18){
+      return true;
+    } else{
+      return false;
+    }
   }
 }

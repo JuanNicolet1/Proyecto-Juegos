@@ -67,6 +67,8 @@ export class MayorMenor {
 
   inicio = true;
   en_juego = false;
+  juego = "mayor-menor"
+  fecha: Date = new Date();
   puntaje = 0;
   imagen = '';
   imagen2 = '';
@@ -200,11 +202,12 @@ export class MayorMenor {
 
   guardar() {
     this.usuario = this.auth.username();
+    this.fecha = new Date(); 
     this.supabaseService.guardarPartida(
     this.usuario,
-    this.puntaje,
-    this.ronda_perdida,
-    this.ronda_ganada,
+    this.juego,
+    this.fecha,
+    this.puntaje
     ).then(() => {
       console.log('Partida guardada en la BD');
     }).catch(err => {

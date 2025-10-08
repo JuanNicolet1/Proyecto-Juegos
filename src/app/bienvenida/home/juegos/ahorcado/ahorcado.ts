@@ -12,7 +12,20 @@ import { SupabaseService } from '../../../../services/supabase';
 })
 export class Ahorcado {
   palabras = ['ANGULAR', 'JAVASCRIPT', 'HTML', 'CSS', 'TYPESCRIPT', 'SUPABASE'];
+  imagenes = ['assets/ahorcado/ahorcado1.png',
+    'assets/ahorcado/ahorcado2.png',
+    'assets/ahorcado/ahorcado3.png',
+    'assets/ahorcado/ahorcado4.png',
+    'assets/ahorcado/ahorcado5.png',
+    'assets/ahorcado/ahorcado6.png',
+    'assets/ahorcado/ahorcado7.png'
+  ]
+  
   vida = 6;
+  index = 0;
+  imagen = this.imagenes[this.index];
+  juego = "ahorcado";
+  fecha: Date = new Date();
   mensaje = '';
   puestoA = false;
   puestoB = false;
@@ -44,7 +57,8 @@ export class Ahorcado {
 
   usuario = '';
   letras_usadas = 0;
-  palabra_acertada = '';
+  puntaje = 0;
+  reiniciar = false
 
   constructor(private supabaseService: SupabaseService, private auth: AuthService) {}
 
@@ -68,19 +82,22 @@ export class Ahorcado {
     }
     this.palabraOculta = palabraOcultaArray.join('');
   } else {
+    this.index += 1;
     this.vida -=1;
+    this.imagen = this.imagenes[this.index]
   }
 
   if(this.palabraOculta === this.palabra) {
     this.mensaje = "¡Ganaste! La palabra es " + this.palabra;
-    this.palabra_acertada = 'Si';
-    this.guardarAhorcado();
+    this.puntaje += 1;
+    this.reiniciar = true;
+    //this.guardarAhorcado();
   }
 
   if(this.vida === 0) {
     this.mensaje = "Perdiste. La palabra era " + this.palabra;
-    this.palabra_acertada = 'No';
-    this.guardarAhorcado();
+    this.reiniciar = true;
+    //this.guardarAhorcado();
   }
 }
 
@@ -300,12 +317,53 @@ export class Ahorcado {
     this.puestoZ = true;
   }
 
-  guardarAhorcado() {
+  reiniciarPartida(){
+    this.reiniciar = false
+    this.index = 0;
+    this.imagen = this.imagenes[this.index];
+    this.vida = 6;
+    this.mensaje = "";
+    this.letrasUsadas = [];
+    this.getRandomPalabra();
+    this.palabra = this.getRandomPalabra();
+    this.palabraOculta = '_'.repeat(this.palabra.length).trim();
+    this.puestoA = false;
+    this.puestoB = false;
+    this.puestoC = false;
+    this.puestoD = false;
+    this.puestoE = false;
+    this.puestoF = false;
+    this.puestoG = false;
+    this.puestoH = false;
+    this.puestoI = false;
+    this.puestoJ = false;
+    this.puestoK = false;
+    this.puestoL = false;
+    this.puestoM = false;
+    this.puestoN = false;
+    this.puestoENIE = false;
+    this.puestoO = false;
+    this.puestoP = false;
+    this.puestoQ = false;
+    this.puestoR = false;
+    this.puestoS = false;
+    this.puestoT = false;
+    this.puestoU = false;
+    this.puestoV = false;
+    this.puestoW = false;
+    this.puestoX = false;
+    this.puestoY = false;
+    this.puestoZ = false;
+  }
+
+  guardar() {
     this.usuario = this.auth.username();
-    this.supabaseService.guardarPartidaAhorcado(
+    this.fecha = new Date(); 
+    this.supabaseService.guardarPartida(
     this.usuario,
-    this.letras_usadas,
-    this.palabra_acertada
+    this.juego,
+    this.fecha,
+    this.puntaje
     ).then(() => {
       console.log('Partida guardada en la BD');
     }).catch(err => {

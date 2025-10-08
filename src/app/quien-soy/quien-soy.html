@@ -2,6 +2,7 @@
 
 <div class="container py-5">
 
+  <!-- Perfil -->
   @if (loading) {
     <div class="d-flex justify-content-center align-items-center">
       <p class="ms-3">Cargando perfil...</p>
@@ -9,25 +10,49 @@
   }
 
   @if (userData) {
-    <div class="row justify-content-center">
+    <div class="row justify-content-center mb-5">
       <div class="card shadow-sm border-0">
-         <div class="card-body text-center">
-            <img [src]="userData.avatar_url" alt="Foto de perfil de {{ userData.name }}" class="mb-3" width="150" height="150" style="object-fit: cover;">
-            <h2 class="card-title">{{ userData.login }}</h2>
-            <p class="card-text text-muted">{{ userData.bio }}
-                @if(!userData.bio){
-                    <p>Sin biografía</p>
-                }
-            </p>
-            <div class="d-flex justify-content-center gap-3 mb-3">
-              <p class="badge bg-primary"> Seguidores: {{ userData.followers }}</p>
-              <p class="badge bg-secondary"> Siguiendo: {{ userData.following }}</p>
-              <p class="badge bg-info"> Repos públicos: {{ userData.public_repos }}</p>
-            </div>
-            <p class="card-text"><strong>Usuario:</strong> {{ userData.login }}</p>
-            <a [href]="userData.html_url" class="btn btn-outline-primary">Ver perfil en GitHub</a>
+        <div class="card-body text-center">
+          <img [src]="userData.avatar_url" alt="Foto de perfil de {{ userData.name }}" class="mb-3 rounded-circle" width="150" height="150" style="object-fit: cover;">
+          <h2 class="card-title">{{ userData.login }}</h2>
+          <p class="card-text text-muted">
+            {{ userData.bio }}
+            @if(!userData.bio){
+              <span class="text-muted">Sin biografía</span>
+            }
+          </p>
+          <div class="d-flex justify-content-center gap-3 mb-3">
+            <span class="badge bg-primary">Seguidores: {{ userData.followers }}</span>
+            <span class="badge bg-secondary">Siguiendo: {{ userData.following }}</span>
+            <span class="badge bg-info text-dark">Repos públicos: {{ userData.public_repos }}</span>
           </div>
+          <a [href]="userData.html_url" class="btn btn-outline-primary">Ver perfil en GitHub</a>
         </div>
+      </div>
     </div>
   }
+
+  <!-- Descripción del juego -->
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-sm border-0 mb-5">
+        <div class="card-body">
+          <h2 class="card-title text-center mb-4">Descripción</h2>
+          <hr>
+          <p class="card-text">Batalla Naval es un juego de estrategia y suerte donde debes localizar y hundir los barcos enemigos.</p>
+          <br>
+          <h3 class="mt-4">Reglas</h3>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">1.  <strong>Objetivo:</strong> Hundir los barcos enemigos</li>
+            <li class="list-group-item">2.  Al iniciar la primera ronda, empiezas con <span class="badge bg-warning text-dark">8 disparos</span> y <span class="badge bg-success">5 barcos</span>. A partir de la segunda ronda empiezas con <span class="badge bg-warning text-dark">9 disparos</span> y <span class="badge bg-success">6 barcos</span></li>
+            <li class="list-group-item">3.  El tablero donde se esconden los barcos es <span class="badge bg-info text-dark">5x5</span></li>
+            <li class="list-group-item">4.  Cuando el disparo cae en el agua, se resta 1 disparo, pero si golpea un barco, el disparo no se resta</li>
+            <li class="list-group-item">5.  Si pierdes, se te da la opción de comenzar una nueva partida</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
+

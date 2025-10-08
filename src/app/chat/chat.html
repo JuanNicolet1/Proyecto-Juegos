@@ -1,23 +1,20 @@
-<div class="chat-container p-3 border rounded bg-light">
-  <div class="messages overflow-auto" style="max-height: 400px;">
-    <div *ngFor="let msg of mensajes">
+<div class="container my-4"> <div class="row justify-content-center"> <div class="col-12 col-sm-8 col-md-5 col-lg-4"> <div class="chat-container p-3 border rounded shadow-sm bg-white"> <div class="messages overflow-auto" style="max-height: 400px;">
+  <div>  @for (msg of mensajes; track msg.id) {
       <div 
-        class="p-2 my-1 rounded"
-        [ngClass]="{
+        class="p-2 my-2" [ngClass]="{
           'bg-primary text-white text-end ms-auto': msg.usuario === usuario,
           'bg-secondary text-white text-start me-auto': msg.usuario !== usuario
-        }"
-        style="max-width: 70%;"
-      >
-        <small><b>{{msg.usuario}}</b> - {{ msg.fecha | date:'shortTime' }}</small>
-        <div>{{ msg.mensaje }}</div>
-      </div>
+          }"
+          style="max-width: 80%;" >
+          <small class="d-block mb-1 opacity-75"><b>{{msg.usuario}}</b> - {{ msg.fecha | date:'shortTime' }}</small>
+          <div>{{ msg.mensaje }}</div>
+        </div>}
     </div>
   </div>
+              
 
   <div class="input-group mt-3">
     <input type="text" class="form-control" [(ngModel)]="mensaje" (keyup.enter)="enviar()">
-    <button class="btn btn-success" (click)="enviar()">Enviar</button>
+    <button class="btn btn-primary" (click)="enviar()">Enviar</button> </div>
   </div>
 </div>
-

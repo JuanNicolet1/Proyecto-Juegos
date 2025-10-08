@@ -124,7 +124,6 @@ export class BatallaNaval implements OnInit{
       this.disparos -= 1;
       this.chequearVida();
     }
-  alert(this.array);
   }
 chequear2(){
   this.click2 = true;

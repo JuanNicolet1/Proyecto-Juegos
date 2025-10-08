@@ -43,7 +43,7 @@ export const routes: Routes = [
     {
         path: 'juegos/batalla-naval',
         loadComponent: () => import("./bienvenida/home/juegos/batalla-naval/batalla-naval").then(m => m.BatallaNaval),
-        canActivate: [AuthGuard, EdadGuard]
+        canActivate: [AuthGuard]
     },
     {
         path: 'ranking-mm',
